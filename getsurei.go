@@ -31,6 +31,7 @@ var offsets = map[int]float64{
 }
 
 const cycle = 29.53059
+
 var reference = time.Date(2019, time.April, 5, 8, 50, 0, 0, time.UTC)
 
 // Getsurei returns the age of the moon in days at time t
