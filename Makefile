@@ -22,6 +22,9 @@ push:
 fmt:
 	gofmt -s -w *.go cmd/*/main.go
 
+install:
+	install getsurei /usr/local/bin
+
 README.md: README.gmi
 	cat README.gmi | sisyphus -a "." -f markdown > README.md
 

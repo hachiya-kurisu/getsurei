@@ -5,6 +5,8 @@ getsurei estimates primary moon phases and the age of the moon.
 
 intentionally imprecise.
 
+![getsurei in action](getsurei.gif)
+
 ## usage
 
 ```
