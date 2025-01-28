@@ -1,5 +1,8 @@
 # getsurei （月齢）
 
+> I'm pretty sure I'm connected to the moon.
+- David Lynch
+
 lunar whimsy.
 getsurei estimates primary moon phases and the age of the moon.
 
