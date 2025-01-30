@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-const Version = "0.0.1"
+const Version = "0.0.2"
 
 const (
 	Shingetsu = iota + 1
