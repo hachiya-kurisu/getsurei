@@ -77,7 +77,11 @@ func Name(t time.Time) string {
 // Next returns the time of the next phase p after time t
 func Next(p int, t time.Time) time.Time {
 	g := Getsurei(t)
-	ds := fmt.Sprintf("%fh", (cycle-g+offsets[p])*24.0)
-	d, _ := time.ParseDuration(ds)
-	return t.Add(d)
+	d := offsets[p] - g
+	if d < 0 {
+		d += cycle
+	}
+	ds := fmt.Sprintf("%fh", d * 24)
+	delta, _ := time.ParseDuration(ds)
+	return t.Add(delta)
 }
