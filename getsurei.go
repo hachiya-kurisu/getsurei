@@ -66,7 +66,7 @@ func Name(t time.Time) string {
 	case Shingetsu:
 		return "新月"
 	case Jougen:
-		return "上限の月"
+		return "上弦の月"
 	case Mangetsu:
 		return "満月"
 	default:

@@ -56,7 +56,7 @@ func main() {
 
 		if *j {
 			jougen := getsurei.Next(getsurei.Jougen, date)
-			fmt.Printf("次の上限の月：%s\n", jougen.Format(*f))
+			fmt.Printf("次の上弦の月：%s\n", jougen.Format(*f))
 		}
 
 		if *m {

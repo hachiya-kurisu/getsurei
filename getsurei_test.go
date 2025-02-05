@@ -29,7 +29,7 @@ func TestShingetsu(t *testing.T) {
 func TestJougen(t *testing.T) {
 	date, _ := time.Parse(layout, "2025.01.14")
 	gessou := getsurei.Name(date)
-	if gessou != "上限の月" {
+	if gessou != "上弦の月" {
 		t.Errorf("oops: %s", gessou)
 	}
 }
