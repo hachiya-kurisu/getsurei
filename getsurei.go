@@ -25,25 +25,25 @@ const (
 
 var locales = map[string]map[string]string{
 	"jp": {
-		"getsurei": "月齢",
+		"getsurei":  "月齢",
 		"shingetsu": "新月",
-		"jougen": "上弦の月",
-		"mangetsu": "満月",
-		"kagen": "下弦の月",
+		"jougen":    "上弦の月",
+		"mangetsu":  "満月",
+		"kagen":     "下弦の月",
 	},
 	"en": {
-		"getsurei": "moon age",
+		"getsurei":  "moon age",
 		"shingetsu": "new moon",
-		"jougen": "first quarter",
-		"mangetsu": "full moon",
-		"kagen": "third quarter",
+		"jougen":    "first quarter",
+		"mangetsu":  "full moon",
+		"kagen":     "third quarter",
 	},
 	"no": {
-		"getsurei": "månealder",
+		"getsurei":  "månealder",
 		"shingetsu": "nymåne",
-		"jougen": "første kvarter",
-		"mangetsu": "fullmåne",
-		"kagen": "siste kvarter",
+		"jougen":    "første kvarter",
+		"mangetsu":  "fullmåne",
+		"kagen":     "siste kvarter",
 	},
 }
 
@@ -116,7 +116,7 @@ func Next(p int, t time.Time) time.Time {
 	if days < 0 {
 		days += cycle
 	}
-	hours := fmt.Sprintf("%fh", days * 24)
+	hours := fmt.Sprintf("%fh", days*24)
 	delta, _ := time.ParseDuration(hours)
 	return t.Add(delta)
 }

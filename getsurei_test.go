@@ -66,7 +66,6 @@ func TestLocaleFallback(t *testing.T) {
 	}
 }
 
-
 func TestNextShingetsu(t *testing.T) {
 	date, _ := time.Parse(layout, "2025.01.27")
 	shingetsu := getsurei.Next(getsurei.Shingetsu, date)
