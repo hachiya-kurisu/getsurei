@@ -23,6 +23,41 @@ const (
 	LastQuarter
 )
 
+var locales = map[string]map[string]string{
+	"jp": {
+		"getsurei": "月齢",
+		"shingetsu": "新月",
+		"jougen": "上弦の月",
+		"mangetsu": "満月",
+		"kagen": "下弦の月",
+	},
+	"en": {
+		"getsurei": "moon age",
+		"shingetsu": "new moon",
+		"jougen": "first quarter",
+		"mangetsu": "full moon",
+		"kagen": "third quarter",
+	},
+	"no": {
+		"getsurei": "månealder",
+		"shingetsu": "nymåne",
+		"jougen": "første kvarter",
+		"mangetsu": "fullmåne",
+		"kagen": "siste kvarter",
+	},
+}
+
+func T(key, locale string) string {
+	translation, ok := locales[locale]
+	if ok {
+		translated, ok := translation[key]
+		if ok {
+			return translated
+		}
+	}
+	return locales["jp"][key]
+}
+
 var offsets = map[int]float64{
 	Shingetsu: 0,
 	Jougen:    7.3826,
@@ -61,16 +96,16 @@ func Gessou(t time.Time) int {
 }
 
 // Name returns the Japanese name of the primary phase of the moon at time t
-func Name(t time.Time) string {
+func Name(t time.Time, locale string) string {
 	switch Gessou(t) {
 	case Shingetsu:
-		return "新月"
+		return T("shingetsu", locale)
 	case Jougen:
-		return "上弦の月"
+		return T("jougen", locale)
 	case Mangetsu:
-		return "満月"
+		return T("mangetsu", locale)
 	default:
-		return "下弦の月"
+		return T("kagen", locale)
 	}
 }
 

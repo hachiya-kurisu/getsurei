@@ -21,10 +21,13 @@ func main() {
 
 	g := flag.Bool("g", true, "print corresponding moon phase")
 
+	l := flag.String("l", "jp", "language (ja/en/no)")
+
 	flag.Parse()
 
 	if *v {
 		fmt.Printf("%s %s\n", os.Args[0], getsurei.Version)
+		os.Exit(0)
 	}
 
 	dates := flag.Args()
@@ -41,32 +44,32 @@ func main() {
 		}
 
 		if *g {
-			fmt.Printf("%s\n", getsurei.Name(date))
+			fmt.Printf("%s\n", getsurei.Name(date, *l))
 		}
 
 		if *a {
 			days := getsurei.Getsurei(date)
-			fmt.Printf("月齢%.2f\n", days)
+			fmt.Printf("%s%.2f\n", getsurei.T("getsurei", *l), days)
 		}
 
 		if *s {
 			shingetsu := getsurei.Next(getsurei.Shingetsu, date)
-			fmt.Printf("次の新月：%s\n", shingetsu.Format(*f))
+			fmt.Printf("%s：%s\n", getsurei.T("shingetsu", *l), shingetsu.Format(*f))
 		}
 
 		if *j {
 			jougen := getsurei.Next(getsurei.Jougen, date)
-			fmt.Printf("次の上弦の月：%s\n", jougen.Format(*f))
+			fmt.Printf("%s：%s\n", getsurei.T("jougen", *l), jougen.Format(*f))
 		}
 
 		if *m {
 			mangetsu := getsurei.Next(getsurei.Mangetsu, date)
-			fmt.Printf("次の満月：%s\n", mangetsu.Format(*f))
+			fmt.Printf("%s：%s\n", getsurei.T("mangetsu", *l), mangetsu.Format(*f))
 		}
 
 		if *k {
 			kagen := getsurei.Next(getsurei.Kagen, date)
-			fmt.Printf("次の下弦の月：%s\n", kagen.Format(*f))
+			fmt.Printf("%s：%s\n", getsurei.T("kagen", *l), kagen.Format(*f))
 		}
 	}
 }

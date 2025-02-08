@@ -20,7 +20,7 @@ func TestGetsurei(t *testing.T) {
 
 func TestShingetsu(t *testing.T) {
 	date, _ := time.Parse(layout, "2025.01.30")
-	gessou := getsurei.Name(date)
+	gessou := getsurei.Name(date, "jp")
 	if gessou != "新月" {
 		t.Errorf("oops: %s", gessou)
 	}
@@ -28,7 +28,7 @@ func TestShingetsu(t *testing.T) {
 
 func TestJougen(t *testing.T) {
 	date, _ := time.Parse(layout, "2025.01.14")
-	gessou := getsurei.Name(date)
+	gessou := getsurei.Name(date, "jp")
 	if gessou != "上弦の月" {
 		t.Errorf("oops: %s", gessou)
 	}
@@ -36,7 +36,7 @@ func TestJougen(t *testing.T) {
 
 func TestMangetsu(t *testing.T) {
 	date, _ := time.Parse(layout, "2025.01.20")
-	gessou := getsurei.Name(date)
+	gessou := getsurei.Name(date, "jp")
 	if gessou != "満月" {
 		t.Errorf("oops: %s", gessou)
 	}
@@ -44,7 +44,7 @@ func TestMangetsu(t *testing.T) {
 
 func TestKagen(t *testing.T) {
 	date, _ := time.Parse(layout, "2025.01.27")
-	gessou := getsurei.Name(date)
+	gessou := getsurei.Name(date, "jp")
 	if gessou != "下弦の月" {
 		t.Errorf("oops: %s", gessou)
 	}
@@ -52,11 +52,20 @@ func TestKagen(t *testing.T) {
 
 func TestBeforeReferenceDate(t *testing.T) {
 	date, _ := time.Parse(layout, "2019.01.27")
-	gessou := getsurei.Name(date)
+	gessou := getsurei.Name(date, "jp")
 	if gessou != "満月" {
 		t.Errorf("oops: %s", gessou)
 	}
 }
+
+func TestLocaleFallback(t *testing.T) {
+	date, _ := time.Parse(layout, "2019.01.27")
+	gessou := getsurei.Name(date, "n/a")
+	if gessou != "満月" {
+		t.Errorf("oops: %s", gessou)
+	}
+}
+
 
 func TestNextShingetsu(t *testing.T) {
 	date, _ := time.Parse(layout, "2025.01.27")
