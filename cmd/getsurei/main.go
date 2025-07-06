@@ -22,8 +22,22 @@ func main() {
 	g := flag.Bool("g", true, "print corresponding moon phase")
 
 	l := flag.String("l", "jp", "language (ja/en/no)")
+	
+	tz := flag.String("tz", "", "time zone")
 
 	flag.Parse()
+
+	var loc *time.Location
+	var err error
+	if *tz != "" {
+		loc, err = time.LoadLocation(*tz)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "invalid time zone: %s\n", *tz)
+			os.Exit(1)
+		}
+	} else {
+		loc = time.Local
+	}
 
 	if *v {
 		fmt.Printf("%s %s\n", os.Args[0], getsurei.Version)
@@ -32,7 +46,7 @@ func main() {
 
 	dates := flag.Args()
 	if len(dates) < 1 {
-		now := time.Now()
+		now := time.Now().In(loc)
 		dates = append(dates, now.Format(*f))
 	}
 
@@ -53,22 +67,22 @@ func main() {
 		}
 
 		if *s {
-			shingetsu := getsurei.Next(getsurei.Shingetsu, date)
+			shingetsu := getsurei.Next(getsurei.Shingetsu, date).In(loc)
 			fmt.Printf("%s：%s\n", getsurei.T("shingetsu", *l), shingetsu.Format(*f))
 		}
 
 		if *j {
-			jougen := getsurei.Next(getsurei.Jougen, date)
+			jougen := getsurei.Next(getsurei.Jougen, date).In(loc)
 			fmt.Printf("%s：%s\n", getsurei.T("jougen", *l), jougen.Format(*f))
 		}
 
 		if *m {
-			mangetsu := getsurei.Next(getsurei.Mangetsu, date)
+			mangetsu := getsurei.Next(getsurei.Mangetsu, date).In(loc)
 			fmt.Printf("%s：%s\n", getsurei.T("mangetsu", *l), mangetsu.Format(*f))
 		}
 
 		if *k {
-			kagen := getsurei.Next(getsurei.Kagen, date)
+			kagen := getsurei.Next(getsurei.Kagen, date).In(loc)
 			fmt.Printf("%s：%s\n", getsurei.T("kagen", *l), kagen.Format(*f))
 		}
 	}
