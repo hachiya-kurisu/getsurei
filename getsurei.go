@@ -2,7 +2,6 @@
 package getsurei
 
 import (
-	"fmt"
 	"math"
 	"time"
 )
@@ -65,7 +64,7 @@ var offsets = map[int]float64{
 	Kagen:     22.1479,
 }
 
-const cycle = 29.53059
+const cycle = 29.530589
 
 var reference = time.Date(2019, time.April, 5, 8, 50, 0, 0, time.UTC)
 
@@ -75,9 +74,8 @@ func Getsurei(t time.Time) float64 {
 	mod := math.Mod(delta, cycle)
 	if mod < 0 {
 		return mod + cycle
-	} else {
-		return mod
 	}
+	return mod
 }
 
 // Gessou returns the primary phase of the moon at time t
@@ -95,7 +93,7 @@ func Gessou(t time.Time) int {
 	}
 }
 
-// Name returns the Japanese name of the primary phase of the moon at time t
+// Name returns the localized name of the primary phase of the moon at time t
 func Name(t time.Time, locale string) string {
 	switch Gessou(t) {
 	case Shingetsu:
@@ -116,7 +114,6 @@ func Next(p int, t time.Time) time.Time {
 	if days < 0 {
 		days += cycle
 	}
-	hours := fmt.Sprintf("%fh", days*24)
-	delta, _ := time.ParseDuration(hours)
-	return t.Add(delta)
+	hours := days * 24
+	return t.Add(time.Duration(hours * float64(time.Hour)))
 }
