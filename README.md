@@ -43,3 +43,6 @@ $ getsurei
 $ getsurei 2025.01.01
 新月
 ```
+## author
+
+[蜂谷栗栖](https://blekksprut.net/)
